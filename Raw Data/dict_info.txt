@@ -1,0 +1,18 @@
+dx_dict
+{0: 'akiec', 1: 'bcc', 2: 'bkl', 3: 'df', 4: 'mel', 5: 'nv', 6: 'vasc'}
+
+dx_type_dict
+{0: 'confocal', 1: 'consensus', 2: 'follow_up', 3: 'histo'}
+
+sex_dict
+{0: 'female', 1: 'male', 2: 'unknown'}
+
+localization_dict
+# {0: 'abdomen', 1: 'acral', 2: 'back', 3: 'chest', 4: 'ear',
+# 5: 'face', 6: 'foot', 7: 'genital', 8: 'hand', 9: 'lower extremity',
+# 10: 'neck', 11: 'scalp', 12: 'trunk', 13: 'unknown', 14: 'upper extremity'}
+
+ageGroup_dict
+# {0: 'children', 1: 'teenage', 2: 'young', 3: 'adult', 4: 'midage',
+# 5: 'old', 6: 'old2', 7: 'old3', 8: 'older'}
+
