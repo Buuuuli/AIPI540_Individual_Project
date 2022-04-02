@@ -1,5 +1,11 @@
 
-
+import numpy as np
+import pandas as pd
+import torch
+from torchvision import transforms
+from torch.utils.data import DataLoader
+import torch.nn.functional as F
+from PIL import Image
 
 def image_pipeline(data):
 
@@ -19,13 +25,13 @@ def image_pipeline(data):
 
 
 
-def meta_pipeline(dx_input,age_input,sex_input,localization_input):
-    dxtype = dx_input
+def meta_pipeline(age_input,sex_input,localization_input):
+
     age = age_input
     sex = sex_input
     localization = localization_input
 
-    d = {'dxtype': [dx_input], 'age': [age_input],'sex': [sex_input],'localization': [localization_input]}
+    d = {'age': [age_input],'sex': [sex_input],'localization': [localization_input]}
     df = pd.DataFrame(data=d)
 
     bins = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
@@ -35,26 +41,20 @@ def meta_pipeline(dx_input,age_input,sex_input,localization_input):
 
     df = df.drop("age", axis=1)
 
-    dxnames = {'bkl': 2, 'mel': 4}
+    #dxnames = {'bkl': 2, 'mel': 4}
+
     agegroupnames = {'children':0, 'teenage':1, 'young':2, 'adult':3, 'midage':4, 'old1':5, 'old2':6,
                      'old3':7, 'older':8}
     sexnames = {'female': 0, 'male': 1,'unknown':2}
+    localizationname = {'abdomen': 0, 'acral':1, 'back':2, 'chest':3, 'ear':4, 'face':5, 'foot':6,
+                     'genital':7, 'hand':8,'lower extremity':9, 'neck':10, 'scalp':11,
+                     'trunk':12, 'unknown':13,'upper extremity':14}
 
+    df['ageGroup'] = df['ageGroup'].map(agegroupnames,na_action=None)
+    df['sex'] = df['sex'].map(sexnames, na_action=None)
+    df['localization'] = df['localization'].map(localizationname, na_action=None)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    return
+    return df
 
 
 def test_model(model, test_loader, device):
