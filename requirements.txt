@@ -3,4 +3,4 @@ pandas
 dash
 torch
 torchvision
-PIL
+pillow

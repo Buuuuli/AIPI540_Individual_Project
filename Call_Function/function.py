@@ -31,7 +31,7 @@ def meta_pipeline(age_input,sex_input,localization_input):
     sex = sex_input
     localization = localization_input
 
-    d = {'age': [age_input],'sex': [sex_input],'localization': [localization_input]}
+    d = {'age': [age],'sex': [sex],'localization': [localization]}
     df = pd.DataFrame(data=d)
 
     bins = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
