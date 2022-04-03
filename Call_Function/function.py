@@ -7,6 +7,7 @@ from torch.utils.data import DataLoader
 import torch.nn.functional as F
 from PIL import Image
 
+
 def image_pipeline(data):
 
   batch_size = 16
