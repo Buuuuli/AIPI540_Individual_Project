@@ -34,10 +34,27 @@ app.layout = html.Div([
         html.H4("Enter your age"),
         dcc.Input(id='age', value='30', type='number'),
 
-    ])
+    ]),
+    html.Br(),
+    html.Div([
+
+    ]),
+    html.Br(),
+    html.Button('Check', id='check-button', n_clicks=0),
+    html.Br(),
+    html.Div(
+        id='my_output'
+    )
 ])
 
+@app.callback(
+    Output("my_output", "children"),
+    Input("check-button", "n_clicks"),
+    [State("gender", "value"), State("localization", "value"), State("age", "value")]
+)
+def predict(n_clicks, gender, localization, age):
 
+    return
 
 
 #'background-image':'url(/webelement/blue_wood.jpg)'
