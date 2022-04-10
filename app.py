@@ -37,7 +37,7 @@ app.layout = html.Div([
                 id='localization'
             )),
         html.H4("Enter your age"),
-        dcc.Input(id='age', value='30', type='number'),
+        dcc.Input(id='age', value=30, type='number'),
 
     ]),
     html.Br(),
@@ -73,7 +73,7 @@ app.layout = html.Div([
 @app.callback(
     Output("my_output", "children"),
     Input("check-button", "n_clicks"),
-    [State("gender", "value"), State("localization", "value"), State("age", "value"), State('image','value')]
+    [State("gender", "value"), State("localization", "value"), State("age", "value"), State('image', 'children')]
 )
 def predict(n_clicks, gender, localization, age, image):
     #metadata part
