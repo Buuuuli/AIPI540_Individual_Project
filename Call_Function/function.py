@@ -26,7 +26,7 @@ def image_pipeline(data):
 
 def meta_pipeline(age_input,sex_input,localization_input):
 
-    age = age_input
+    age = int(age_input)
     sex = sex_input
     localization = localization_input
 

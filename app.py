@@ -63,7 +63,7 @@ app.layout = html.Div([
         )
     ]),
     html.Br(),
-    html.Button('Check', id='check-button', n_clicks=0),
+    html.Button('Check What Skin Disease could be', id='check-button', n_clicks=0),
     html.Br(),
     html.Div(
         id='my_output'
@@ -94,21 +94,16 @@ def predict(n_clicks, gender, localization, age, image):
 
     j, k = test_model(model2, b, device)
 
-
-
-
-
     if test_preds[0][0] ==4 and j ==4:
-        print('Including Melanoma')
+        m = 'Including Melanoma'
     elif test_preds[0][0] ==2 and j ==2:
-        print('Benign Keratosis')
+        m = 'Benign Keratosis'
     else:
         prob4 = 0.5*k[4] + 0.5*meta__prob
         prob2 = 0.5*k[2] + 0.5*(1-meta__prob)
-        print('The Probability of Including Melanoma is ',prob4, 'The Probability of Benign Keratosis is ',prob2 )
+        m = 'The Probability of Including Melanoma is ' + str(prob4) + 'The Probability of Benign Keratosis is ' + str(prob2)
 
-
-    return
+    return m
 
 
 #'background-image':'url(/webelement/blue_wood.jpg)'
