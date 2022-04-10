@@ -40,9 +40,9 @@ import matplotlib.pyplot as plt
 
 
 
-model_path = 'Model'
+#model_path = 'Model'
 
-filename = 'deep_fullmodel_new.pt'
+#filename = 'deep_fullmodel_new.pt'
 
 model2 = torch.load('Model/deep_fullmodel_new.pt')
 

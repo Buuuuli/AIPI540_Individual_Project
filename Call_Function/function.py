@@ -3,23 +3,20 @@ import numpy as np
 import pandas as pd
 import torch
 from torchvision import transforms
-from torch.utils.data import DataLoader
 import torch.nn.functional as F
 from PIL import Image
 
 
 def image_pipeline(data):
 
-  batch_size = 16
 
   # set transformer
-  trans = transforms.Compose([#transforms.ToPILImage(),
+  trans = transforms.Compose([
                             transforms.Resize((224, 224)),
                             transforms.ToTensor(),
                             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
   n= trans(Image.open(data))
 
-  #test_loader = DataLoader(n,batch_size=batch_size, shuffle=False)
   # set dimention to fit the model
   n = n[None, None, :]
   return n

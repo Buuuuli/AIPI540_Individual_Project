@@ -1,8 +1,11 @@
 import dash
 import pandas as pd
 from dash.dependencies import Input, Output, State
-from dash import dcc, dash_table
+from dash import dcc
 from dash import html
+from Call_Function import *
+import pickle as pkl
+import torch
 
 
 app = dash.Dash(__name__)
@@ -13,6 +16,8 @@ colors = {
 }
 
 app.layout = html.Div([
+    html.Div([html.H1('Skin Health')], style={'color': 'blue', 'fontSize': 14, 'textAlign': 'center',
+                                              'marginBottom': 50, 'marginTop': 25}),
     html.Div([
 
         html.H4("Choose Your Gender"),
@@ -44,7 +49,7 @@ app.layout = html.Div([
                 html.A('Select Files')
             ]),
             style={
-                'width': '100%',
+                'width': '20%',
                 'height': '60px',
                 'lineHeight': '60px',
                 'borderWidth': '1px',
@@ -68,9 +73,40 @@ app.layout = html.Div([
 @app.callback(
     Output("my_output", "children"),
     Input("check-button", "n_clicks"),
-    [State("gender", "value"), State("localization", "value"), State("age", "value")]
+    [State("gender", "value"), State("localization", "value"), State("age", "value"), State('image','value')]
 )
-def predict(n_clicks, gender, localization, age):
+def predict(n_clicks, gender, localization, age, image):
+    #metadata part
+    filepath = 'Model/randomforest.sav'
+    loaded_model = pkl.load(open(filepath, 'rb'))
+    a = meta_pipeline(age, gender, localization)
+    test_preds = loaded_model.predict(a).reshape(len(a), 1)
+
+    meta__prob = loaded_model.predict_proba(a)
+
+    # image part
+
+    model2 = torch.load('Model/deep_fullmodel_new.pt')
+
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+    b = image_pipeline(image)
+
+    j, k = test_model(model2, b, device)
+
+
+
+
+
+    if test_preds[0][0] ==4 and j ==4:
+        print('Including Melanoma')
+    elif test_preds[0][0] ==2 and j ==2:
+        print('Benign Keratosis')
+    else:
+        prob4 = 0.5*k[4] + 0.5*meta__prob
+        prob2 = 0.5*k[2] + 0.5*(1-meta__prob)
+        print('The Probability of Including Melanoma is ',prob4, 'The Probability of Benign Keratosis is ',prob2 )
+
 
     return
 
