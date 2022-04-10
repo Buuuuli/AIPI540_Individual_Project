@@ -19,9 +19,10 @@ def image_pipeline(data):
                             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
   n= trans(Image.open(data))
 
-  test_loader = DataLoader(n,batch_size=batch_size, shuffle=False)
-
-  return test_loader
+  #test_loader = DataLoader(n,batch_size=batch_size, shuffle=False)
+  # set dimention to fit the model
+  n = n[None, None, :]
+  return n
 
 
 
@@ -70,7 +71,7 @@ def test_model(model, test_loader, device):
         probability = []
         # Calculate the predictions on the test set and add to list
         for data in test_loader:
-            inputs = data[0].to(device)
+            inputs = data.to(device)
             # Feed inputs through model to get raw scores
             logits = model.forward(
                 inputs)  # model_resnet                                         # change net to cost_path

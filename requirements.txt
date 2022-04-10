@@ -4,3 +4,5 @@ dash
 torch
 torchvision
 pillow
+sklearn
+matplotlib
