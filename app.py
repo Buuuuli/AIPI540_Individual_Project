@@ -7,7 +7,6 @@ from Call_Function import *
 import pickle as pkl
 import torch
 
-
 app = dash.Dash(__name__)
 
 colors = {
@@ -21,18 +20,18 @@ app.layout = html.Div([
     html.Div([
 
         html.H4("Choose Your Gender"),
-            html.Div(
+        html.Div(
             dcc.Dropdown(
                 ["female", "male", "unknown"],
                 "male",
                 id='gender'
             )),
         html.H4("Where is the symptom"),
-            html.Div(
+        html.Div(
             dcc.Dropdown(
                 ['abdomen', 'acral', 'back', 'chest', 'ear', 'face', 'foot',
-                     'genital', 'hand','lower extremity', 'neck', 'scalp',
-                     'trunk', 'unknown','upper extremity'],
+                 'genital', 'hand', 'lower extremity', 'neck', 'scalp',
+                 'trunk', 'unknown', 'upper extremity'],
                 "chest",
                 id='localization'
             )),
@@ -42,7 +41,7 @@ app.layout = html.Div([
     ]),
     html.Br(),
     html.Div([
-    dcc.Upload(
+        dcc.Upload(
             id='image',
             children=html.Div([
                 'Drag and Drop or ',
@@ -70,43 +69,55 @@ app.layout = html.Div([
     )
 ])
 
+
 @app.callback(
     Output("my_output", "children"),
-    Input("check-button", "n_clicks"),
-    [State("gender", "value"), State("localization", "value"), State("age", "value"), State('image', 'children')]
+    [Input("check-button", "n_clicks"),
+    Input("image", "contents")],
+    [State("gender", "value"), State("localization", "value"),
+     State("age", "value"),State("image", "filename")]
 )
-def predict(n_clicks, gender, localization, age, image):
-    #metadata part
+
+def predict(n_clicks, image_contents, gender, localization, age, image_filename):
+    # metadata part
+
     filepath = 'Model/randomforest.sav'
+
     loaded_model = pkl.load(open(filepath, 'rb'))
+
     a = meta_pipeline(age, gender, localization)
+
     test_preds = loaded_model.predict(a).reshape(len(a), 1)
 
     meta__prob = loaded_model.predict_proba(a)
 
     # image part
-
     model2 = torch.load('Model/deep_fullmodel_new.pt')
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    b = image_pipeline(image)
 
-    j, k = test_model(model2, b, device)
+    if image_filename is not None and image_contents is not None:
+        #for name, data in zip(image_filename, image_contents):
 
-    if test_preds[0][0] ==4 and j ==4:
-        m = 'Including Melanoma'
-    elif test_preds[0][0] ==2 and j ==2:
-        m = 'Benign Keratosis'
-    else:
-        prob4 = 0.5*k[4] + 0.5*meta__prob
-        prob2 = 0.5*k[2] + 0.5*(1-meta__prob)
-        m = 'The Probability of Including Melanoma is ' + str(prob4) + 'The Probability of Benign Keratosis is ' + str(prob2)
+        b = image_pipeline(image_contents)
+
+        test_preds_DL, probability = test_model(model2, b, device)
+
+        if test_preds[0][0] == 4 and test_preds_DL[0] == 4:
+            m = 'Including Melanoma'
+        elif test_preds[0][0] == 2 and test_preds_DL[0] == 2:
+            m = 'Benign Keratosis'
+        else:
+            prob4 = 0.5 * probability[4] + 0.5 * meta__prob
+            prob2 = 0.5 * probability[2] + 0.5 * (1 - meta__prob)
+            m = 'The Probability of Including Melanoma is ' + str(prob4) + 'The Probability of Benign Keratosis is ' + str(
+                prob2)
 
     return m
 
 
-#'background-image':'url(/webelement/blue_wood.jpg)'
+# 'background-image':'url(/webelement/blue_wood.jpg)'
 # Run it!
 if __name__ == '__main__':
     app.run_server(debug=True)

@@ -5,6 +5,9 @@ import torch
 from torchvision import transforms
 import torch.nn.functional as F
 from PIL import Image
+#import cv2 as cv
+
+
 
 
 def image_pipeline(data):
@@ -26,7 +29,7 @@ def image_pipeline(data):
 
 def meta_pipeline(age_input,sex_input,localization_input):
 
-    age = int(age_input)
+    age = age_input
     sex = sex_input
     localization = localization_input
 
