@@ -16,32 +16,6 @@ from dash import html
 from Call_Function import *
 import pickle as pkl
 import torch
-app = dash.Dash(__name__)
-
-app.layout = html.Div([
-    html.H6("Change the value in the text box to see callbacks in action!"),
-    html.Div([
-        "Input: ",
-        dcc.Input(id='my-input', value='3', type='number')
-    ]),
-    html.Br(),
-    html.Div(id='my-output'),
-
-])
-
-
-@app.callback(
-    Output(component_id='my-output', component_property='children'),
-    Input(component_id='my-input', component_property='value')
-)
-def update_output_div(input_value):
-    a = input_value
-    return a
-
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
-
 
 # ML Part
 #filepath = 'Model/randomforest.sav'
@@ -59,6 +33,9 @@ if __name__ == '__main__':
 #test_preds = loaded_model.predict(a).reshape(len(a),1)
 
 
+#meta__prob = loaded_model.predict_proba(a)
+
+
 
 #if test_preds[0][0] ==4:
     #print('Including Melanoma')
@@ -73,20 +50,99 @@ if __name__ == '__main__':
 
 
 
-#model_path = 'Model'
+model2 = torch.load('Model/deep_fullmodel_new.pt')
 
-#filename = 'deep_fullmodel_new.pt'
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-#model2 = torch.load('Model/deep_fullmodel_new.pt')
-
-#device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-#image = 'webelement/ISIC_0024315.jpg'
+image = 'webelement/ISIC_0024315.jpg'
 
 
+b = image_pipeline(image)
 
-#b = image_pipeline(image)
+
+j,k = test_model(model2, b, device)
 
 
 
-#j,k = test_model(model2, b, device)
+
+
+import dash
+from dash.dependencies import Input, Output, State
+from dash import dcc
+from dash import html
+#import dash_table_experiments as dt
+import base64
+import datetime
+import json
+import pandas as pd
+import plotly
+import io
+import numpy as np
+
+
+
+
+app = dash.Dash()
+
+app.scripts.config.serve_locally = True
+
+app.layout = html.Div([
+    dcc.Upload(
+        id='upload-image',
+        children=html.Div([
+            'Drag and Drop or ',
+            html.A('Select Files')
+        ]),
+        style={
+            'width': '100%',
+            'height': '60px',
+            'lineHeight': '60px',
+            'borderWidth': '1px',
+            'borderStyle': 'dashed',
+            'borderRadius': '5px',
+            'textAlign': 'center',
+            'margin': '10px'
+        },
+        # Allow multiple files to be uploaded
+        multiple=True
+    ),
+    html.Div(id='output-image-upload'),
+])
+
+
+def parse_contents(contents):
+    return html.Div([
+
+        # HTML images accept base64 encoded strings in the same format
+        # that is supplied by the upload
+        html.Img(src=contents),
+        html.Hr(),
+        html.Div('Raw Content'),
+        html.Pre(contents[:100] + '...', style={
+            'whiteSpace': 'pre-wrap',
+            'wordBreak': 'break-all'
+        })
+    ])
+@app.callback(Output('output-image-upload', 'children'),
+              [Input('upload-image', 'contents')])
+def update_output(images):
+    if not images:
+        return
+
+    for i, image_str in enumerate(images):
+        image = image_str.split(',')[1]
+        data = base64.decodestring(image.encode('ascii'))
+        with open(f"image_{i+1}.jpg", "wb") as f:
+            f.write(data)
+
+    children = [parse_contents(i) for i in images]
+    return children
+
+
+app.css.append_css({
+    'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'
+})
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
+
