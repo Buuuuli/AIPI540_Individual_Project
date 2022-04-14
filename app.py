@@ -8,6 +8,7 @@ import pickle as pkl
 import torch
 import base64
 import io
+from PIL import Image
 
 app = dash.Dash(__name__)
 
@@ -105,10 +106,19 @@ def predict(n_clicks, image_contents, gender, localization, age, image_filename)
 
             #for name, data in zip(image_filename, image_contents):
 
-        decode_byte = base64.b64decode(bytes(image_contents[0], 'utf-8'))  # type = Bytes
+        #decode_byte = base64.b64decode(bytes(image_contents[0], 'utf-8'))  # type = Bytes
 
 
-        b = image_pipeline(io.BytesIO(decode_byte))
+
+        encoded_image = image_contents.split(",")[1]
+        decoded_image = base64.b64decode(encoded_image)
+        bytes_image = io.BytesIO(decoded_image)
+        image=Image.open(bytes_image).convert('RGB')
+
+
+
+
+        b = image_pipeline(image)
 
         test_preds_DL, probability = test_model(model2, b, device)
 
