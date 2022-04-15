@@ -27,11 +27,7 @@ Final Project
     <img src="webelement/1650042563926.jpg" alt="Logo" width="400" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
-
-  <p align="center">
-    An awesome skin health app
-    <br />
+  <h3 align="center">An awesome skin health app</h3>
 
 </div>
 
