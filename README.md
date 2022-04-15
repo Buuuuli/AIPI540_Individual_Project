@@ -1,5 +1,6 @@
-# AIPI540_Individual_Project
+# AIPI540 Individual Project
 Final Project
+
 <div id="top"></div>
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
