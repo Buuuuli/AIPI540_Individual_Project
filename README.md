@@ -209,7 +209,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Kaiqi Meng - [@your_twitter](https://twitter.com/your_username) - km509@duke.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/your_username/repo_name](https://github.com/Buuuuli/AIPI540_Individual_Project)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
