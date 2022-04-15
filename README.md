@@ -207,9 +207,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Kaiqi Meng - [@your_twitter](https://twitter.com/your_username) - km509@duke.com
+Kaiqi Meng  - km509@duke.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/Buuuuli/AIPI540_Individual_Project)
+Project Link: [Buuuuli/AIPI540](https://github.com/Buuuuli/AIPI540_Individual_Project)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
