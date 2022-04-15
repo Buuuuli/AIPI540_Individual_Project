@@ -220,14 +220,12 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/Bu
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
+* [Build an app with dash](https://dash.plotly.com/introduction)
+* [Web server](https://www.nginx.com)
+* [Non-Sucking web service manager](https://nssm.cc/)
+* [Github webhook](https://docs.github.com/en/developers/webhooks-and-events/webhooks/about-webhooks)
+* [Buy a domain](https://www.godaddy.com/en-ca/domains)
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
