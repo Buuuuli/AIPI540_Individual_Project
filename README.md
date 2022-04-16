@@ -1,21 +1,7 @@
 # AIPI540 Individual Project
-Final Project
+
 
 <div id="top"></div>
-
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![MIT License][license-shield]][license-url]
 
 
 
@@ -104,17 +90,9 @@ opencv-python
 2. Model includes a random forest model and a pretrained resnet 18 model. 
    The final layer of the resnet 18 model is replaced and retrained. 
 3. Raw_Data contains the raw metadata. Due to the image data is way too large, I cannot upload them to github.
-4. Saved_Data contains the tidy data in the 
+4. Saved_Data contains the tidy metadata.
+5. Webelement folder includes some picture for building up the website.
 
-
-Install NPM packages
-   ```sh
-   npm install
-   ```
-5. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
