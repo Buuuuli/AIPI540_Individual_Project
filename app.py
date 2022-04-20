@@ -22,10 +22,8 @@ app.layout = html.Div([
 
     html.Img(src='data:image/png;base64,{}'.format(test_base64))], style={'textAlign': 'center'}),
     html.Div([
-
         html.H4("Choose Your Gender",style={'textAlign': 'center'
                                               }),
-        html.Br(),
         html.Div(
             dcc.Dropdown(
                 ["female", "male", "unknown"],
@@ -40,7 +38,9 @@ app.layout = html.Div([
                               'width': '50%',
                              }),
         html.Br(),
-
+        html.Br(),
+        html.Br(),
+        html.Br(),
         html.H4("Where is the symptom",style={'textAlign': 'center'
                                               }),
         html.Br(),
@@ -61,9 +61,16 @@ app.layout = html.Div([
                               'width': '50%',
                              }),
         html.Br(),
+        html.Br(),
         html.H4("Enter your age",style={'textAlign': 'center',
                                               }),
-        dcc.Input(id='age', value=30, type='number'),
+        dcc.Input(id='age', value=30, type='number', style={'textAlign': 'center',
+                       'position': 'absolute',
+                             'left' : '50%',
+                             'transform': 'translateX(-50%)',
+                             'display': 'inline-block',
+                              'width': '50%',
+                             }),
 
     ]),
     html.Br(),
@@ -74,10 +81,10 @@ app.layout = html.Div([
                 'Drag and Drop or ',
                 html.A('Select Files')
             ]),
-            style={
+            style={'position': 'absolute',
                 'width': '20%',
-                'height': '60px',
-                'lineHeight': '60px',
+                'height': '30px',
+                'lineHeight': '30px',
                 'borderWidth': '1px',
                 'borderStyle': 'dashed',
                 'borderRadius': '5px',
@@ -89,11 +96,27 @@ app.layout = html.Div([
         )
     ]),
     html.Br(),
-    html.Button('Check What Skin Disease could be', id='check-button', n_clicks=0),
+    html.Br(),
+
+    html.Button('Check What Skin Disease could be', id='check-button', n_clicks=0,
+                style={
+                        'marginRight': '50px',
+                        'textAlign': 'center'
+            }),
     html.Br(),
     html.Div(
-        id='my_output'
-    )
+        id='my_output', style={'textAlign': 'center',
+                       'position': 'absolute',
+                             'left' : '50%',
+                             'transform': 'translateX(-50%)',
+                             'display': 'inline-block',
+                              'width': '50%',
+                             }
+    ),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
 ])
 
 
@@ -102,7 +125,8 @@ app.layout = html.Div([
     [Input("check-button", "n_clicks"),
     Input("image", "contents")],
     [State("gender", "value"), State("localization", "value"),
-     State("age", "value"),State("image", "filename")]
+     State("age", "value"),State("image", "filename")],
+    prevent_initial_call=True
 )
 
 def predict(n_clicks, image_contents, gender, localization, age, image_filename):
