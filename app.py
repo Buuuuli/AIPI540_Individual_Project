@@ -12,14 +12,15 @@ from PIL import Image
 
 app = dash.Dash(__name__)
 
-colors = {
-    'background': '#111111',
-    'text': '#7FDBFF'
-}
+doc_image = "webelement/doc.png"
+test_base64 = base64.b64encode(open(doc_image, 'rb').read()).decode('ascii')
 
 app.layout = html.Div([
     html.Div([html.H1('Skin Health')], style={'color': 'blue', 'fontSize': 14, 'textAlign': 'center',
                                               'marginBottom': 50, 'marginTop': 25}),
+    html.Div([
+
+    html.Img(src='data:image/png;base64,{}'.format(test_base64))], style={'height':'10%','textAlign': 'center'}),
     html.Div([
 
         html.H4("Choose Your Gender"),
@@ -135,7 +136,7 @@ def predict(n_clicks, image_contents, gender, localization, age, image_filename)
                 prob2)
 
     else:
-        m = 'image invalid'
+        m = 'select image'
 
     return m
 
