@@ -20,26 +20,49 @@ app.layout = html.Div([
                                               'marginBottom': 50, 'marginTop': 25}),
     html.Div([
 
-    html.Img(src='data:image/png;base64,{}'.format(test_base64))], style={'height':'10%','textAlign': 'center'}),
+    html.Img(src='data:image/png;base64,{}'.format(test_base64))], style={'textAlign': 'center'}),
     html.Div([
 
-        html.H4("Choose Your Gender"),
+        html.H4("Choose Your Gender",style={'textAlign': 'center'
+                                              }),
+        html.Br(),
         html.Div(
             dcc.Dropdown(
                 ["female", "male", "unknown"],
                 "male",
-                id='gender'
-            )),
-        html.H4("Where is the symptom"),
+                id='gender', style={'textAlign': 'center',
+                                              'marginBottom': 50, 'marginTop': 25}
+            ), style={
+                       'position': 'absolute',
+                             'left' : '50%',
+                             'transform': 'translateX(-50%)',
+                             'display': 'inline-block',
+                              'width': '50%',
+                             }),
+        html.Br(),
+
+        html.H4("Where is the symptom",style={'textAlign': 'center'
+                                              }),
+        html.Br(),
         html.Div(
             dcc.Dropdown(
                 ['abdomen', 'acral', 'back', 'chest', 'ear', 'face', 'foot',
                  'genital', 'hand', 'lower extremity', 'neck', 'scalp',
                  'trunk', 'unknown', 'upper extremity'],
                 "chest",
-                id='localization'
-            )),
-        html.H4("Enter your age"),
+                id='localization',
+                style={'textAlign': 'center'}
+
+            ), style={
+                       'position': 'absolute',
+                             'left' : '50%',
+                             'transform': 'translateX(-50%)',
+                             'display': 'inline-block',
+                              'width': '50%',
+                             }),
+        html.Br(),
+        html.H4("Enter your age",style={'textAlign': 'center',
+                                              }),
         dcc.Input(id='age', value=30, type='number'),
 
     ]),
@@ -59,7 +82,7 @@ app.layout = html.Div([
                 'borderStyle': 'dashed',
                 'borderRadius': '5px',
                 'textAlign': 'center',
-                'margin': '10px'
+                'margin': '10px',
             },
             # Allow multiple files to be uploaded
             multiple=False
