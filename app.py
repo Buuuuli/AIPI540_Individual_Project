@@ -74,6 +74,12 @@ app.layout = html.Div([
 
     ]),
     html.Br(),
+    html.Br(),
+    html.Br(),
+    html.H4("upload a photo of your skin",style={'textAlign': 'center',
+                                              }),
+    html.Br(),
+    html.Br(),
     html.Div([
         dcc.Upload(
             id='image',
@@ -81,9 +87,10 @@ app.layout = html.Div([
                 'Drag and Drop or ',
                 html.A('Select Files')
             ]),
-            style={'position': 'absolute',
-                'width': '20%',
+             style={'display': 'inline-block',
+                'width': '50%',
                 'height': '30px',
+                'left' : '25%',
                 'lineHeight': '30px',
                 'borderWidth': '1px',
                 'borderStyle': 'dashed',
@@ -97,22 +104,27 @@ app.layout = html.Div([
     ]),
     html.Br(),
     html.Br(),
-
+    html.Br(),
+    html.Br(),
     html.Button('Check What Skin Disease could be', id='check-button', n_clicks=0,
                 style={
                         'marginRight': '50px',
-                        'textAlign': 'center'
-            }),
-    html.Br(),
-    html.Div(
-        id='my_output', style={'textAlign': 'center',
-                       'position': 'absolute',
+                        'textAlign': 'center',
+                          'position': 'absolute',
                              'left' : '50%',
                              'transform': 'translateX(-50%)',
                              'display': 'inline-block',
                               'width': '50%',
-                             }
+
+            }),
+    html.Br(),
+    html.Div(
+        id='my_output'
     ),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     html.Br(),
     html.Br(),
     html.Br(),
