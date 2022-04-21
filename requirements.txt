@@ -11,3 +11,4 @@ opendatasets
 tqdm
 torchsummary
 kaggle
+waitress
