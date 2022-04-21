@@ -12,7 +12,7 @@ from PIL import Image
 
 app = dash.Dash(__name__)
 
-doc_image = "webelement/doc.png"
+doc_image = "webelement/docnew.png"
 test_base64 = base64.b64encode(open(doc_image, 'rb').read()).decode('ascii')
 
 app.layout = html.Div([
