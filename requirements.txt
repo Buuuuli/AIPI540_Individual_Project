@@ -7,3 +7,7 @@ pillow
 sklearn
 matplotlib
 opencv-python
+opendatasets
+tqdm
+torchsummary
+kaggle
