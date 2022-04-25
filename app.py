@@ -118,8 +118,17 @@ app.layout = html.Div([
 
             }),
     html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     html.Div(
-        id='my_output'
+        id='my_output',style={
+                       'position': 'absolute',
+                             'left' : '50%',
+                             'transform': 'translateX(-50%)',
+                             'display': 'inline-block',
+                              'width': '50%',
+                             }
     ),
     html.Br(),
     html.Br(),
