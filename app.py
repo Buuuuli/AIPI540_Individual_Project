@@ -200,8 +200,7 @@ def predict(n_clicks, image_contents, gender, localization, age, image_filename)
         else:
             prob4 = 0.8 * probability[0].tolist()[4] + 0.2 * meta__prob[0][1]
             prob2 = 0.8 * probability[0].tolist()[2] + 0.2 * meta__prob[0][0]
-            m = 'The Probability of Including Melanoma is ' + str(prob4) + '                                            ' \
-                                                                           'The Probability of Benign Keratosis is ' + str(
+            m = 'The Probability of Including Melanoma is ' + str(prob4) + '                                            The Probability of Benign Keratosis is ' + str(
                 prob2)
 
     else:
