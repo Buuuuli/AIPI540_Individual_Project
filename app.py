@@ -22,7 +22,7 @@ app.layout = html.Div([
 
     html.Img(src='data:image/png;base64,{}'.format(test_base64))], style={'textAlign': 'center'}),
     html.Div([
-        html.H4("Choose Your Gender",style={'textAlign': 'center'
+        html.H4("Step 1 Choose Your Gender",style={'textAlign': 'center'
                                               }),
         html.Div(
             dcc.Dropdown(
@@ -41,7 +41,7 @@ app.layout = html.Div([
         html.Br(),
         html.Br(),
         html.Br(),
-        html.H4("Where is the symptom",style={'textAlign': 'center'
+        html.H4("Step 2 Where is the symptom",style={'textAlign': 'center'
                                               }),
         html.Br(),
         html.Div(
@@ -62,7 +62,7 @@ app.layout = html.Div([
                              }),
         html.Br(),
         html.Br(),
-        html.H4("Enter your age",style={'textAlign': 'center',
+        html.H4("Step 3 Enter your age",style={'textAlign': 'center',
                                               }),
         dcc.Input(id='age', value=30, type='number', style={'textAlign': 'center',
                        'position': 'absolute',
@@ -76,7 +76,7 @@ app.layout = html.Div([
     html.Br(),
     html.Br(),
     html.Br(),
-    html.H4("upload a photo of your skin",style={'textAlign': 'center',
+    html.H4("Step 4 upload a photo of your skin",style={'textAlign': 'center',
                                               }),
     html.Br(),
     html.Br(),
@@ -200,8 +200,7 @@ def predict(n_clicks, image_contents, gender, localization, age, image_filename)
         else:
             prob4 = 0.8 * probability[0].tolist()[4] + 0.2 * meta__prob[0][1]
             prob2 = 0.8 * probability[0].tolist()[2] + 0.2 * meta__prob[0][0]
-            m = 'The Probability of Including Melanoma is ' + str(prob4) + '                                            The Probability of Benign Keratosis is ' + str(
-                prob2)
+            m = 'The Probability of Including Melanoma is ' + str(prob4) + 'The Probability of Benign Keratosis is ' + str(prob2)
 
     else:
         m = 'select image'
